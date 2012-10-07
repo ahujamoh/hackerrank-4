@@ -1,0 +1,21 @@
+Primes
+
+Write a code in whichever language you are comfortable with to print as many prime numbers as you can. The prime numbers can be separated by a space or a newline. Your score is the number of prime numbers you print. Can you be in the top 50 percentile? - a surprise waits.. You can read about different prime number algorithms here
+
+//  main.c
+//  primes
+//
+//  NOTES
+//  40,000 elapsed: 13.410259 by skipping even numbers
+//  40000 elapsed: 7.828817 by via checking only first half factors
+//  40000 elapsed: 5.712772 by checking only first 1/3 factors
+//  40000 elapsed: 3.643709 by checking only first 1/5 factors
+//  40000 elapsed: 2.705176 by checking only first 1/7 factors
+//  40000 elapsed: 0.960590 by checking using int instead of long
+//  40000 elapsed: 0.194436, by studying upper bounds of max prime factor (was 691 for 40,000)
+//  TODO: use log/exp/proportions to give a lower number for 40,000 , higher number for 1000
+
+Written in xcode
+
+~B
+
