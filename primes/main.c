@@ -9,6 +9,7 @@
 //  40000 elapsed: 3.643709 by checking only first 1/5 factors
 //  40000 elapsed: 2.705176 by checking only first 1/7 factors
 //  40000 elapsed: 0.960590 by checking using int instead of long
+//  40000 elapsed: 0.194436, by studying upper bounds of max prime factor (was 691 for 40,000)
 //
 //  Created by Bosky <bosky101@gmail.com> on 10/7/12.
 //  Copyright (c) 2012 Bosky. All rights reserved.
@@ -21,17 +22,19 @@
 #define MAX 40000
 int bitmap[MAX];
 int _index=0;
-
+int _max_factor=0;
 int
 isPrime(int m){
     int res=1;
     for(int i=0;i<_index;i++){
         int n = bitmap[i];
+        //printf("\n\tis %d %% %d = %d ",m,bitmap[i], m % bitmap[i]);
         if(m % n == 0){
-            //printf("\n\tis %lu %% %lu = %lu ? so %lu is not prime",m,bitmap[i], m % bitmap[i], m / bitmap[i]);
+            //printf("\n\tis %d %% %d = %d ? so %d is not prime",m,bitmap[i], m % bitmap[i], m / bitmap[i]);
+            _max_factor = (_max_factor<n)?n:_max_factor;
             res=0;break;
         }
-        if(n > m/7){
+        if(n > MAX/10){
             break;
         }
     }
@@ -48,16 +51,17 @@ calculatePrimes(){
     for(int i=3; ctr<MAX;i+=2){
         if(isPrime(i)){
             ++ctr;
-            printf("%d ",i);
+            printf("\n %d ",i);
         }
     }
 }
 
-int main(int argc, const char * argv[]){
+int
+main(int argc, const char * argv[]){
     clock_t start = clock() ;
     calculatePrimes();
     clock_t end = clock() ;
     double elapsed_time = (end-start)/(double)CLOCKS_PER_SEC ;
-    printf(" \n%d elapsed: %f",MAX, elapsed_time );
+    printf(" \n%d elapsed: %f, max prime factor was %d",MAX, elapsed_time,_max_factor );
     return 0;
 }
