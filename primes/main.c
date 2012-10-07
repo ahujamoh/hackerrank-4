@@ -1,6 +1,6 @@
 //
 //  main.c
-//  primes
+//  primes - a weekend c exercise
 //
 //  NOTES
 //  40,000 elapsed: 13.410259 by skipping even numbers
@@ -20,7 +20,15 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 1000
+/**
+ * How many primes are you trying to find. useful to target which spot you want 
+ * to get on the leaderboard. Made it to #5 with the last commit
+ *
+ * For benchmarking flip to 40,000
+ * For testing, flip to http://primes.utm.edu/lists/small/1000.txt and compare last
+ * For making it to #5 on the leaderboard on http://hackerrank.com, flipped to 195100 :)
+ */
+#define MAX 40000
 int bitmap[MAX];
 int _index=0;
 int _max_factor=0;
@@ -34,8 +42,6 @@ isPrime(int m){
             //printf("\n\tis %d %% %d = %d ? so %d is not prime",m,bitmap[i], m % bitmap[i], m / bitmap[i]);
             _max_factor = (_max_factor<n)?n:_max_factor;
             res=0;break;
-        }else{
-            
         }
         if(n > MAX/10){
             break;
