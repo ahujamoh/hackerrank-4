@@ -10,6 +10,7 @@
 //  40000 elapsed: 2.705176 by checking only first 1/7 factors
 //  40000 elapsed: 0.960590 by checking using int instead of long
 //  40000 elapsed: 0.194436, by studying upper bounds of max prime factor (was 691 for 40,000)
+//  TODO: use log/exp/proportions to give a lower number for 40,000 , higher number for 1000
 //
 //  Created by Bosky <bosky101@gmail.com> on 10/7/12.
 //  Copyright (c) 2012 Bosky. All rights reserved.
@@ -19,7 +20,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 40000
+#define MAX 1000
 int bitmap[MAX];
 int _index=0;
 int _max_factor=0;
@@ -33,6 +34,8 @@ isPrime(int m){
             //printf("\n\tis %d %% %d = %d ? so %d is not prime",m,bitmap[i], m % bitmap[i], m / bitmap[i]);
             _max_factor = (_max_factor<n)?n:_max_factor;
             res=0;break;
+        }else{
+            
         }
         if(n > MAX/10){
             break;
