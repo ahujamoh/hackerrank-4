@@ -25,7 +25,7 @@ Write a code in whichever language you are comfortable with to print as many pri
 
 /**
  * How many primes are you trying to find. useful to target which spot you want 
- * to get on the leaderboard. Made it to #5 with the last commit
+ * to get on the leaderboard. Made it to #2 with the last commit
  *
  * For benchmarking flip to 40,000
  * For testing, flip to 1000, and compare with http://markknowsnothing.com/cgi-bin/primes.php
@@ -34,7 +34,7 @@ Write a code in whichever language you are comfortable with to print as many pri
 
 See main.c for actual code. written on a mac, on a weekend dedicated to C/C++.
 
-Found this puzzle on http://hackerrank.com ( this solution hit #5 in the leaderboard finding 195101 primes )
+Found this puzzle on http://hackerrank.com ( this solution hit #2 in the leaderboard finding 281001 )
 
 ~B
 
