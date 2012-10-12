@@ -17,6 +17,8 @@
 //  40000 elapsed: 0.056665, max prime factor:569 pivot:568.545481l, reducing upper bound by a factor 1/log2(MAX) 90% of max factor. still false +ves
 //  40000 elapsed: 0.070723, max prime factor:569 pivot:568.545481l, recalculating upper bound in loop
 //  40000 elapsed: 0.061341, max prime factor:569 pivot:568.545481l, reusing variables
+//  40000 elapsed: 0.058866, max prime factor:569 pivot:568, removed globals from tight loops, used more unsigned ints, static functions
+//  40000 elapsed: 0.056781, max prime factor:569 pivot:568, enum, ++var instead of var++, while loop, descending loop
 //
 //  Created by Bosky <bosky101@gmail.com> on 10/7/12.
 //  Copyright (c) 2012 Bosky. All rights reserved.
@@ -35,62 +37,61 @@
  * For testing, flip to http://primes.utm.edu/lists/small/1000.txt and compare last
  * For making it to #5 on the leaderboard on http://hackerrank.com, flipped to 195100 :)
  */
-#define MAX 40000//40000
-int bitmap[MAX];
-int _index=0;
-int _max_factor=0;
-double _pivot;
+enum { MAX=40000 };
+static unsigned int bitmap[MAX];
+unsigned int _index=0;
+unsigned int _max_factor=0;
+unsigned int _pivot;
 
-void calculatePrimes(int);
+static int
+calculatePrimes(unsigned int);
 
 int
 main(int argc, const char * argv[]){
-    calculatePrimes(MAX);
-    return 0;
+    return calculatePrimes(MAX);
 }
 
-int
-isPrime(int m){
-    //int m_2=m/2;
-    for(int i=0,_next=0;i<_index;i++){
-        int n = bitmap[i];
-        /*if(n > m_2){
-            break;
-        }*/
+__inline static int
+isPrime(unsigned int m){
+    for(unsigned int i=0;i<_index;i++){
+        unsigned int n = bitmap[i];
         //printf("\n\tis %d %% %d = %d ?",m,bitmap[i], m % bitmap[i]);
         if(0==(m % n)){
             //printf("\n\tis %d %% %d = %d !",m,bitmap[i], m % bitmap[i]);
             _max_factor = (_max_factor<n)?n:_max_factor;
-            m=0;break;
+            return 0;m=0;break;
         }
-        if(n > _pivot){
-            //printf("\n\t %d > %d",m,bitmap[i], m % bitmap[i]);
-            _next=1;
+        if(n >_pivot){
+            //printf("\n\t %d > %d, n-_p = %d",n, _pivot,n-_pivot);
             break;
         }
     }
     if(m){
-        //printf("\n%d not div: ",m);for(int j=0;j<_index;j++){printf(" %d",bitmap[j]);}printf("\n");
+        //printf("\n%d not div: ",m);for(unsigned int j=0;j<_index;j++){printf(" %d",bitmap[j]);}printf("\n");
         bitmap[_index++]=m;m=1;
     }
     return m;
 }
 
-void
-calculatePrimes(_MAX){
+static int
+calculatePrimes(unsigned int _MAX){
     clock_t start = clock() ;
 
     printf("2 ");
     //_pivot = (_MAX*0.9 /(log10(_MAX) * log2(_MAX))); //571
     //_pivot += (log10(_MAX)*_MAX/1600);
-    for(int i=3,ctr=0; ctr<_MAX;i+=2){
+    //for(unsigned int i=3,ctr=MAX; 0!=ctr;i+=2){
+    unsigned int i=3,ctr=_MAX;
+    while(ctr){
         //_pivot = (_MAX/log2(_MAX)); //691
         _pivot = (_MAX /(log10(_MAX) * log2(_MAX))); //571
         if(isPrime(i)){
-            printf("%d ",i);++ctr;
+            printf("%d ",i);ctr--;
         }
+        i+=2;
     }
     clock_t end = clock() ;
     double elapsed_time = (end-start)/(double)CLOCKS_PER_SEC ;
-    printf(" \n%d elapsed: %f, max prime factor:%d pivot:%fl",_MAX, elapsed_time,_max_factor,_pivot);
+    printf(" \n%d elapsed: %f, max prime factor:%d pivot:%d",_MAX, elapsed_time,_max_factor,_pivot);
+    return 0;
 }
