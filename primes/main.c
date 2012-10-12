@@ -35,7 +35,7 @@
  *
  * For benchmarking flip to 40,000
  * For testing, flip to http://primes.utm.edu/lists/small/1000.txt and compare last
- * For making it to #5 on the leaderboard on http://hackerrank.com, flipped to 195100 :)
+ * For making it to #2 on the leaderboard on http://hackerrank.com, flipped to 281001 :)
  */
 enum { MAX=40000 };
 static unsigned int bitmap[MAX];
