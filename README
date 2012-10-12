@@ -13,15 +13,23 @@ Write a code in whichever language you are comfortable with to print as many pri
 //  40000 elapsed: 2.705176 by checking only first 1/7 factors
 //  40000 elapsed: 0.960590 by checking using int instead of long
 //  40000 elapsed: 0.194436, by studying upper bounds of max prime factor (was 691 for 40,000)
-//  TODO: use log/exp/proportions to give a lower number for 40,000 , higher number for 1000
+//  40000 elapsed: 0.168760, by seting upper bound based on MAX/log2(MAX)
+//  40000 elapsed: 0.108759, max prime factor:691 pivot:2616.480413l, break if upper bound satisfied
+//  40000 elapsed: 0.104322, max prime factor:691 pivot:2666.000000l, compare 0 with variable, instead of vice-versa
+//  40000 elapsed: 0.028197, max prime factor:173 pivot:171.149244l, reducing upper bound by a factor 1/log2(MAX). false +ves
+//  40000 elapsed: 0.056665, max prime factor:569 pivot:568.545481l, reducing upper bound by a factor 1/log2(MAX) 90% of max factor. still false +ves
+//  40000 elapsed: 0.070723, max prime factor:569 pivot:568.545481l, recalculating upper bound in loop
+//  40000 elapsed: 0.061341, max prime factor:569 pivot:568.545481l, reusing variables
+//  40000 elapsed: 0.058866, max prime factor:569 pivot:568, removed globals from tight loops, used more unsigned ints, static functions
+//  40000 elapsed: 0.056781, max prime factor:569 pivot:568, enum, ++var instead of var++, while loop, descending loop
 
 /**
  * How many primes are you trying to find. useful to target which spot you want 
  * to get on the leaderboard. Made it to #5 with the last commit
  *
  * For benchmarking flip to 40,000
- * For testing, flip to http://primes.utm.edu/lists/small/1000.txt and compare last
- * For making it to #5 on the leaderboard on http://hackerrank.com, flipped to 195100 :)
+ * For testing, flip to 1000, and compare with http://markknowsnothing.com/cgi-bin/primes.php
+ * For making it to #2 on the leaderboard on http://hackerrank.com, flipped to 281001. logged in as Guest-84
  */
 
 See main.c for actual code. written on a mac, on a weekend dedicated to C/C++.
